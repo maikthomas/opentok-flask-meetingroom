@@ -1,10 +1,14 @@
-import config
-from flask import Flask, g, json, jsonify
+from flask import Flask, jsonify
 from flask_cors import CORS
+
 from opentok import MediaModes, OpenTok
+
+import config
 
 app = Flask(__name__)
 CORS(app)
+opentok = OpenTok(config.OPENTOK_API_KEY, config.OPENTOK_SECRET)
+opensession = opentok.create_session(media_mode=MediaModes.routed)
 
 
 @app.route("/")
@@ -14,16 +18,10 @@ def hello():
 
 @app.route("/session", methods=['GET', 'OPTIONS'])
 def session():
-    opentok = OpenTok(config.OPENTOK_API_KEY, config.OPENTOK_SECRET)
-    session = g.get('session')
-    if not session:
-            session = opentok.create_session(media_mode=MediaModes.routed)
-            g.session = session
-
-    token = session.generate_token()
+    token = opensession.generate_token()
 
     session_data = {
-        "sessionId": session.session_id,
+        "sessionId": opensession.session_id,
         "apiKey": config.OPENTOK_API_KEY,
         "token": token
     }
