@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>OT Accelerator Core</title>
+
+    <link rel="stylesheet" href="static/css/style.css">
+
+</head>
+
+<body>
+    <div class="App">
+        <div class="App-header">
+            <img src="/static/images/logo.svg" class="App-logo" alt="logo" />
+            <h1>OpenTok Accelerator Core</h1>
+        </div>
+        <section>
+        <header>
+          <img src="images/opentok-logo.png" alt="opentok transparent logo">
+        </header>
+
+        <h1>The OpenTok Platform Demo</h1>
+
+
+          <p>
+            <input type="text" id="room" class="required" placeholder="Type the name of the meeting">
+            <input type="text" id="user" placeholder="Type your name">
+            </p><p class="error-room error-text">Please enter a meeting name</p>
+          <p></p>
+          <button id="enter" onclick="redirectToMeeting()" class="btn tb btn-primary btn-arrow btn-next btn-padding">Create Meeting</button>
+          <p class="error-title error-text">Please fill in required information</p>
+          <script>
+          function redirectToMeeting() {
+            var room = document.getElementById("room").value;
+            var user = document.getElementById("user").value;
+            var url = "/room/"+room;
+            debugger;
+            window.location.href = "room/test";
+          }
+          </script>
+      </section>
+    </div>
+
+</body>
+
+</html>
